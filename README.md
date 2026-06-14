@@ -14,8 +14,7 @@ My analysis focuses on translating raw endpoint, network, and cloud telemetry in
 | Case ID | Incident Type | Primary Log Sources | Key Techniques Detected | Status |
 | :--- | :--- | :--- | :--- | :--- |
 | **[CASE-001](./Case-001-Sysmon-ReverseShell/)** | Interactive C2 Reverse Shell | Sysmon (IDs 1, 3) | Living-off-the-Land, PowerShell `IEX` | **Completed** |
-| *CASE-002* | *Upcoming Investigation* | *TBD* | *Credential Dumping / Persistence* | *In Pipeline* |
-
+| **[CASE-002](./Case-002-SSH-BruteForce/)** | External SSH Password Spray & Breach | systemd-journald (Linux Logs) | Automated Dictionary Attack, Hydra | **Completed** |
 ---
 
 ## 🎯 Portfolio Objectives
