@@ -1,0 +1,52 @@
+EVIDENCE ARTIFACTS: COMPREHENSIVE SSH BRUTE-FORCE LIFECYCLE
+[LOG-01]: SYSTEMD-JOURNALD - SSHD AUTHENTICATION FAILURE (AUTOMATED SPRAY)
+Log Subsystem:  systemd-journald / syslog
+Service Unit:   ssh.service (sshd)
+Date/Time:      Jun 13 13:43:39
+Event Type:     Authentication Failure
+Severity:       Warning
+Computer:       server
+
+Description:
+Jun 13 13:43:39 server sshd-session[4554]: Failed password for invalid user apple from 192.168.247.133 port 52616 ssh2
+
+Technical Breakdown:
+
+Attack Pattern: An automated daemon connection request trying to bind to an unmapped identity profile context ("apple").
+
+Source Infrastructure: Originating from malicious socket node IP 192.168.247.133 over source port 52616.
+
+[LOG-02]: SYSTEMD-JOURNALD - MAXIMUM RE-ATTEMPTS & CORRUPTION INJECTION
+Log Subsystem:  systemd-journald / syslog
+Service Unit:   ssh.service (sshd)
+Date/Time:      Jun 13 13:44:15
+Event Type:     Connection Drop / Rate Limit Triggered
+Severity:       Info
+Computer:       server
+
+Description:
+Jun 13 13:44:15 server sshd[4554]: Connection closed by authenticating user host 192.168.247.133 port 44680 [preauth]
+
+Technical Breakdown:
+
+Defensive Reaction: OpenSSH engine drop-stalling aggressive authentication loops.
+
+Impact: The tool (Hydra) exceeded the maximum startup connection thresholds (MaxStartups), 
+causing the endpoint daemon to forcefully terminate the socket thread channel during the pre-authentication ([preauth]) phase to protect system memory resources.
+
+[LOG-03]: SYSTEMD-JOURNALD - CRYPTOGRAPHIC CHALLENGE ACCEPTED (PERIMETER BREACH)
+Log Subsystem:  systemd-journald / syslog
+Service Unit:   ssh.service (sshd)
+Date/Time:      Jun 13 15:43:49
+Event Type:     Successful Authentication
+Severity:       Notice / Critical Alert
+Computer:       server
+
+Description:
+Jun 13 15:43:49 server sshd-session[2931]: Accepted password for host from 192.168.247.135 port 51124 ssh2
+
+Technical Breakdown:
+
+Compromise Token: The threat actor successfully matched the credential parameters for valid administrative user "host".
+
+Impact: Cryptographic identity validation completed successfully. OpenSSH spawned a functional interactive TTY command shell environment for rogue source infrastructure 192.168.247.135, changing the status of this event from "scanning/reconnaissance" to "active host compromise".
